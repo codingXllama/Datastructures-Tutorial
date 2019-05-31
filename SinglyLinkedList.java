@@ -20,8 +20,9 @@ public class SinglyLinkedList {
 
      */
 
+    //Displaying the SinglyLinked list linkedList elements
     public void DisplayLinkedList() {
-//Displaying the SinglyLinked list linkedList elements
+
         ListNode currentNode = headNode;
         while (currentNode != null) {
             System.out.print(currentNode.data + " --> ");
@@ -30,6 +31,7 @@ public class SinglyLinkedList {
         System.out.print("null ");
     }
 
+    //Finding the largest number in the linked list
     public int LinkedListSize()
     {
         ListNode currentNode= headNode;
