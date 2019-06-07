@@ -32,6 +32,9 @@ public class InsertEnd_SinglyLinkedList {
         System.out.print(" null ");
     }
 
+
+
+
     public void InsertLast(int userNodeValue) {
         ListNode newNode = new ListNode(userNodeValue);
         ListNode currentNode = headNode;
@@ -43,6 +46,35 @@ public class InsertEnd_SinglyLinkedList {
         //System.out.print(newNode.dataField);
 
 
+    }
+
+    public void ReverseList()
+    {
+        ListNode currentNode=headNode;
+        //the previousNode will be the new headNode when we reverse the linkedList
+        ListNode previousNode=null;
+
+        while (currentNode!=null)
+        {
+
+        }
+    }
+
+
+    public boolean FindElement(int searchKeyData)
+    {
+        ListNode currentNode= headNode;
+        while(currentNode!=null)
+        {
+            if(currentNode.dataField==searchKeyData)
+            {
+                System.out.println("\nThe node: "+searchKeyData+" does Exists!");
+                return  true;
+            }
+            currentNode=currentNode.nextField;
+        }
+        System.out.println("\nThe node: "+searchKeyData+" does NOT Exists!");
+        return false;
     }
 
 
@@ -65,6 +97,10 @@ public class InsertEnd_SinglyLinkedList {
         linkList_Object.InsertLast(20);
         linkList_Object.InsertLast(390);
         linkList_Object.DisplyList();
+
+//        Searching for a particular dataField
+        linkList_Object.FindElement(3);
+
 
 
     }
