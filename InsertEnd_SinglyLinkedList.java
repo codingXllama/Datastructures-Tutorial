@@ -53,11 +53,17 @@ public class InsertEnd_SinglyLinkedList {
         ListNode currentNode=headNode;
         //the previousNode will be the new headNode when we reverse the linkedList
         ListNode previousNode=null;
+        ListNode nextNode=null;
 
         while (currentNode!=null)
         {
-
+            nextNode=currentNode.next;
+            currentNode.next=perviousNode;
+            previousNode=currentNode;
+            currentNode=nextNode;
+            
         }
+        return previousNode;
     }
 
 
