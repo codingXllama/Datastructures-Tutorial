@@ -21,7 +21,8 @@ public class SinglyLinkedList0 {
     }
 
     //creating the display method
-    private void DisplayList(ListNode headNode) {
+    //Time Complexity: O(n)
+    public void DisplayList(ListNode headNode) {
         ListNode currentNode = headNode;
         while (currentNode != null) {
             System.out.print(currentNode.dataField + " -> ");
@@ -31,7 +32,8 @@ public class SinglyLinkedList0 {
     }
 
     //creating the method to reverse the linkedList
-    private ListNode ReverseList(ListNode headNode) {
+    //Time Complexity: O(n)
+    public ListNode ReverseList(ListNode headNode) {
         if (headNode == null) {
             return headNode;
         }
@@ -50,7 +52,8 @@ public class SinglyLinkedList0 {
     }
 
     //creating the method for inserting a node at the front of the linked List
-    private void InsertFront(int userData) {
+    //Time Complexity: O(1), because we are inserting at the head(first node) of the singly linked list
+    public void InsertFront(int userData) {
         //creating the newNode to be inserted
         ListNode newNode = new ListNode(userData);
         // ListNode currentNode= headNode;
@@ -58,7 +61,9 @@ public class SinglyLinkedList0 {
         headNode = newNode;
     }
 
-    private void InsertEnd(int userData) {
+    //This method is for inserting an element at the end of the singly linked list
+    //Time Complexity: O(n), where n is the size of elements  we must traverse through in order to reach and insert an element in the singly linked list
+    public void InsertEnd(int userData) {
         ListNode newNode = new ListNode(userData);
         ListNode currentNode = headNode;
 
@@ -69,37 +74,75 @@ public class SinglyLinkedList0 {
         currentNode.nextField = newNode;
     }
 
-    public  int ListLength(ListNode userHeadNode)
-    {
-        int count=0;
-        ListNode currentNode= userHeadNode;
-        while (currentNode!=null)
-        {
-            count+=1;
-            currentNode=currentNode.nextField;
+    //This method is responsible for finding the size of the Singly Linked List
+    //Time Complexity: O(n)
+    public int ListLength(ListNode userHeadNode) {
+        int count = 0;
+        ListNode currentNode = userHeadNode;
+        while (currentNode != null) {
+            count += 1;
+            currentNode = currentNode.nextField;
         }
         return count;
 
     }
 
-    public int MaxValue(int listSize)
-    {
-        ListNode currentNode= headNode;
-        int maxValue=headNode.dataField;
+    //This method is responsible for finding the maximum value of a node inside a linked list
+    //Time Complexity: O(n)
+    public int MaxValue(int listSize) {
+        ListNode currentNode = headNode;
+        int maxValue = headNode.dataField;
         int counter;
-        for(counter=0;counter<listSize;counter++)
-        {
-            if (currentNode.dataField>maxValue)
-            {
-                maxValue=currentNode.dataField;
+        for (counter = 0; counter < listSize; counter++) {
+            if (currentNode.dataField > maxValue) {
+                maxValue = currentNode.dataField;
             }
-            currentNode=currentNode.nextField;
+            currentNode = currentNode.nextField;
         }
         return maxValue;
 
     }
 
+    //This Method is responsible for finding the lowest value in the singly linked list
+    //Time Complexity: O(n), where n is the size of the singly linked list
+    public int MinValue(int listSize) {
+        ListNode currentNode = headNode;
+        int minValue = currentNode.dataField;
+        int counter;
+        for (counter = 0; counter < listSize; counter++) {
+            if (currentNode.dataField < minValue) {
+                minValue = currentNode.dataField;
+            }
+            currentNode = currentNode.nextField;
 
+        }
+        return minValue;
+    }
+
+
+    //This method is responsible for finding the middle value of a singly linked list regardless of it's size is even or odd
+    //Time complexity: O(n), where n is the number of nodes in the given singly linked list
+    public ListNode GetMiddleElement(ListNode userHeadNode) {
+        ListNode fastPointer = userHeadNode;
+        ListNode slowPointer = userHeadNode;
+        //first we must always check if the head is pointing to null
+        if(headNode==null)
+        {
+            return null;
+        }
+
+        //moving both pointers as long as the fastPointer does not equal to null and it does not reference to null
+        while(fastPointer!=null && fastPointer.nextField!=null)
+        {
+
+            slowPointer=slowPointer.nextField;
+            fastPointer=fastPointer.nextField.nextField;
+        }
+        return slowPointer;
+    }
+
+
+    //Main method is where we create and provoke functions on our SinglyLinkedList object
     public static void main(String[] args) {
 
         //creating the nodes for the linked List
@@ -115,33 +158,44 @@ public class SinglyLinkedList0 {
 
         //creating a linkedList object to invoke different methods on it
         SinglyLinkedList0 myLinkedList = new SinglyLinkedList0();
+
         //assigning the local headNode variable to the SinglyLinkedList0 object's instance variable
         myLinkedList.headNode = headNode;
 
-
         //Inserting a key at the front of a linked list
         myLinkedList.InsertFront(21);
+        myLinkedList.InsertEnd(89);
 
         //Inserting a key at the end of a linked list
         myLinkedList.InsertEnd(690);
 
         //getting the length of the list
-        int listLength=myLinkedList.ListLength(myLinkedList.headNode);
-        System.out.println("The list Length is: "+listLength);
+        int listLength = myLinkedList.ListLength(myLinkedList.headNode);
+        System.out.println("The list Length is: " + listLength);
 
         //Finding the maximum value in the linked list
-        System.out.println("The Max value in the linked list is: "+myLinkedList.MaxValue(listLength));
+        System.out.println("The Max value in the linked list is: " + myLinkedList.MaxValue(listLength));
 
+        //Finding the minimum value in the linked List
+        System.out.println("The min value in the linked list is: " + myLinkedList.MinValue(listLength));
 
+        //Displaying the linked list before it has been reversed
         System.out.print("\nBefore Reversing the list: ");
         myLinkedList.DisplayList(myLinkedList.headNode);
 
-        //Reversing the headNode
+        //Finding the middle element of the Original(Not reversed) singly linked list
+        System.out.println("The middle element is: "+myLinkedList.GetMiddleElement(myLinkedList.headNode).dataField+"\n");
+
+        //Reversing the linked list, we do this by creating an a listNode that stores the reversed headNode
         System.out.print("After Reversing the list: ");
         ListNode reversedHeadNode = myLinkedList.ReverseList(myLinkedList.headNode);
+
         //Displaying the reversed LinkedList
         myLinkedList.DisplayList(reversedHeadNode);
 
+        //Finding the middle element of the Reversed singly linked list
+        ListNode ReversedMiddleNode = myLinkedList.GetMiddleElement(reversedHeadNode);
+        System.out.println("The middle element is: "+ReversedMiddleNode.dataField);
 
 
 
