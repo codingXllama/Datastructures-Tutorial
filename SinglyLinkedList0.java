@@ -126,20 +126,65 @@ public class SinglyLinkedList0 {
         ListNode fastPointer = userHeadNode;
         ListNode slowPointer = userHeadNode;
         //first we must always check if the head is pointing to null
-        if(headNode==null)
-        {
+        if (headNode == null) {
             return null;
         }
 
         //moving both pointers as long as the fastPointer does not equal to null and it does not reference to null
-        while(fastPointer!=null && fastPointer.nextField!=null)
-        {
-
-            slowPointer=slowPointer.nextField;
-            fastPointer=fastPointer.nextField.nextField;
+        while (fastPointer != null && fastPointer.nextField != null) {
+            //moving up the slowPointer which is used for 
+            slowPointer = slowPointer.nextField;
+            fastPointer = fastPointer.nextField.nextField;
         }
         return slowPointer;
     }
+
+//    public ListNode NthElementFromEnd(int listSize, int userNumber) {
+//        if (this.headNode == null) {
+//            return null;
+//        }
+//        //this.headNode=headNode;
+//        ListNode mainPointer = headNode;
+//        int numberOfMoves = listSize - userNumber;
+//        while (numberOfMoves > 0) {
+//            mainPointer = mainPointer.nextField;
+//            numberOfMoves--;
+//        }
+//
+//        return mainPointer;
+//    }
+
+    public ListNode NthElementFromEndNew(int userNumber)
+    {
+        ListNode mainPtr= headNode;
+        ListNode refPtr= headNode;
+        int counter=0;
+
+        while(counter<userNumber)
+        {
+            refPtr= refPtr.nextField;
+            counter+=1;
+        }
+
+        while (refPtr!=null && refPtr.nextField!=null)
+        {
+            refPtr=refPtr.nextField;
+            mainPtr=mainPtr.nextField;
+        }
+        return mainPtr;
+    }
+
+//    public ListNode NthElementFromBackNew2(int userValue, int listSize)
+//    {
+//        int maxSize= listSize-1;
+//        int indexOfN=maxSize-userValue;
+//        ListNode mainPtr= headNode;
+//        while (indexOfN>0)
+//        {
+//            mainPtr=mainPtr.nextField;
+//        }
+//    }
+
 
 
     //Main method is where we create and provoke functions on our SinglyLinkedList object
@@ -183,8 +228,14 @@ public class SinglyLinkedList0 {
         System.out.print("\nBefore Reversing the list: ");
         myLinkedList.DisplayList(myLinkedList.headNode);
 
+        //Finding the nth element from the back
+        ListNode nthLastElement = myLinkedList.NthElementFromEndNew(2);
+        System.out.println("The value for nth term is: " + nthLastElement.dataField);
+
+        System.out.println("New way- The value of the nth terms is: "+myLinkedList.NthElementFromEndNew(2).dataField);
+
         //Finding the middle element of the Original(Not reversed) singly linked list
-        System.out.println("The middle element is: "+myLinkedList.GetMiddleElement(myLinkedList.headNode).dataField+"\n");
+        System.out.println("The middle element is: " + myLinkedList.GetMiddleElement(myLinkedList.headNode).dataField + "\n");
 
         //Reversing the linked list, we do this by creating an a listNode that stores the reversed headNode
         System.out.print("After Reversing the list: ");
@@ -195,9 +246,11 @@ public class SinglyLinkedList0 {
 
         //Finding the middle element of the Reversed singly linked list
         ListNode ReversedMiddleNode = myLinkedList.GetMiddleElement(reversedHeadNode);
-        System.out.println("The middle element is: "+ReversedMiddleNode.dataField);
+        System.out.println("The middle element is: " + ReversedMiddleNode.dataField);
 
-
+        //ListNode nthReversedValue = myLinkedList.NthElementFromEnd(listLength, 2, reversedHeadNode);
+        //Finding the nth Number from the end of the Reversed linkedList
+        //System.out.println("The value for nth term is: " + nthReversedValue.dataField);
 
 
     }
