@@ -139,20 +139,22 @@ public class SinglyLinkedList0 {
         return slowPointer;
     }
 
-//    public ListNode NthElementFromEnd(int listSize, int userNumber) {
-//        if (this.headNode == null) {
-//            return null;
-//        }
-//        //this.headNode=headNode;
-//        ListNode mainPointer = headNode;
-//        int numberOfMoves = listSize - userNumber;
-//        while (numberOfMoves > 0) {
-//            mainPointer = mainPointer.nextField;
-//            numberOfMoves--;
-//        }
-//
-//        return mainPointer;
-//    }
+    //This is the second way of trying to read nth data from the end of list
+    //Time complexity is O(n), where n is the number of elements in the list.
+   public ListNode NthElementFromEnd(int listSize, int userNumber) {
+       if (this.headNode == null) {
+           return null;
+       }
+       //this.headNode=headNode;
+       ListNode mainPointer = headNode;
+       int numberOfMoves = listSize - userNumber;
+       while (numberOfMoves > 0) {
+           mainPointer = mainPointer.nextField;
+           numberOfMoves--;
+       }
+
+       return mainPointer;
+   }
 
     public ListNode NthElementFromEndNew(int userNumber)
     {
